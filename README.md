@@ -4,7 +4,7 @@
 
 日常桌面是 Hyprland。这套给 X11 / dwm 用。当前 dwm 的 **Mod 是 Alt**（Hyprland 占 Super；切到 dwm 桌面再改 `Mod4Mask`）。键位以各仓 `config.def.h` 为准（dmenu 的 Ctrl 键在 `dmenu.c`）。改 `config.def.h` 后删 `config.h` 再编译。
 
-GitHub：`git@github.com:liuxinyang1984/<仓名>.git`（`suckless`、`dwm`、`st`、`dmenu`、`tabbed`、`surf`、`slstatus`、`mini-polkit`）。surf 跟踪上游分支 `surf-webkit2`。GitHub 上 slstatus 仓名目前是 `-slstatus`（前导 `-`），本地目录仍是 `slstatus/`。
+GitHub：`git@github.com:liuxinyang1984/<仓名>.git`（`suckless`、`dwm`、`st`、`dmenu`、`tabbed`、`surf`、`slstatus`、`mini-polkit`）。surf 跟踪上游分支 `surf-webkit2`。
 
 ## 克隆
 
@@ -154,5 +154,5 @@ Mod+Space 拉起。默认横条；竖列加 `-l 20`。
 ## 相关
 
 - [doc/index.md](doc/index.md)
-- [dwm](https://github.com/liuxinyang1984/dwm) · [st](https://github.com/liuxinyang1984/st) · [dmenu](https://github.com/liuxinyang1984/dmenu) · [tabbed](https://github.com/liuxinyang1984/tabbed) · [surf](https://github.com/liuxinyang1984/surf) · [slstatus](https://github.com/liuxinyang1984/-slstatus) · [mini-polkit](https://github.com/liuxinyang1984/mini-polkit)
+- [dwm](https://github.com/liuxinyang1984/dwm) · [st](https://github.com/liuxinyang1984/st) · [dmenu](https://github.com/liuxinyang1984/dmenu) · [tabbed](https://github.com/liuxinyang1984/tabbed) · [surf](https://github.com/liuxinyang1984/surf) · [slstatus](https://github.com/liuxinyang1984/slstatus) · [mini-polkit](https://github.com/liuxinyang1984/mini-polkit)
 - 上游：[dwm](https://dwm.suckless.org/) · [st](https://st.suckless.org/) · [dmenu](https://tools.suckless.org/dmenu/) · [tabbed](https://tools.suckless.org/tabbed/) · [surf](https://surf.suckless.org/) · [slstatus](https://tools.suckless.org/slstatus/)

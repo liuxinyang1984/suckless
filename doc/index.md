@@ -1,6 +1,6 @@
 # suckless
 
-父仓库：文档 + 子模块。源码与补丁历史在 [dwm](https://github.com/liuxinyang1984/dwm)、[st](https://github.com/liuxinyang1984/st)、[dmenu](https://github.com/liuxinyang1984/dmenu)、[tabbed](https://github.com/liuxinyang1984/tabbed)、[surf](https://github.com/liuxinyang1984/surf)、[slstatus](https://github.com/liuxinyang1984/-slstatus)、[mini-polkit](https://github.com/liuxinyang1984/mini-polkit)。
+父仓库：文档 + 子模块。源码与补丁历史在 [dwm](https://github.com/liuxinyang1984/dwm)、[st](https://github.com/liuxinyang1984/st)、[dmenu](https://github.com/liuxinyang1984/dmenu)、[tabbed](https://github.com/liuxinyang1984/tabbed)、[surf](https://github.com/liuxinyang1984/surf)、[slstatus](https://github.com/liuxinyang1984/slstatus)、[mini-polkit](https://github.com/liuxinyang1984/mini-polkit)。
 
 安装和快捷键见 [README.md](../README.md)。
 
@@ -15,7 +15,7 @@ suckless/
 ├── st/           # submodule
 ├── tabbed/       # submodule
 ├── surf/         # submodule（分支 surf-webkit2）
-├── slstatus/     # submodule（GitHub 仓名 -slstatus）
+├── slstatus/     # submodule
 └── mini-polkit/  # submodule
 ```
 
