@@ -17,3 +17,6 @@
 	path = surf
 	url = git@github.com:liuxinyang1984/surf.git
 	branch = surf-webkit2
+[submodule "slstatus"]
+	path = slstatus
+	url = git@github.com:liuxinyang1984/-slstatus.git

@@ -1,10 +1,10 @@
 # suckless
 
-个人 fork 的 dwm / st / dmenu / tabbed / surf，外加 [mini-polkit](https://github.com/liuxinyang1984/mini-polkit)。父仓库只放说明和子模块指针；补丁历史在各子仓里。
+个人 fork 的 dwm / st / dmenu / tabbed / surf / slstatus，外加 [mini-polkit](https://github.com/liuxinyang1984/mini-polkit)。父仓库只放说明和子模块指针；补丁历史在各子仓里。
 
 日常桌面是 Hyprland。这套给 X11 / dwm 用。当前 dwm 的 **Mod 是 Alt**（Hyprland 占 Super；切到 dwm 桌面再改 `Mod4Mask`）。键位以各仓 `config.def.h` 为准（dmenu 的 Ctrl 键在 `dmenu.c`）。改 `config.def.h` 后删 `config.h` 再编译。
 
-GitHub：`git@github.com:liuxinyang1984/<仓名>.git`（`suckless`、`dwm`、`st`、`dmenu`、`tabbed`、`surf`、`mini-polkit`）。surf 跟踪上游分支 `surf-webkit2`。
+GitHub：`git@github.com:liuxinyang1984/<仓名>.git`（`suckless`、`dwm`、`st`、`dmenu`、`tabbed`、`surf`、`slstatus`、`mini-polkit`）。surf 跟踪上游分支 `surf-webkit2`。GitHub 上 slstatus 仓名目前是 `-slstatus`（前导 `-`），本地目录仍是 `slstatus/`。
 
 ## 克隆
 
@@ -31,13 +31,13 @@ sudo pacman -S base-devel libx11 libxft libxext libxinerama fontconfig freetype2
 
 dwm swallow 需要 xcb。surf 需要 GTK3 / GCR / WebKitGTK（`pkg-config` 名见 `surf/config.mk`）。拉 GitHub 不稳时终端 `proxyon`。
 
-## 安装 dwm / st / dmenu / tabbed / surf
+## 安装 dwm / st / dmenu / tabbed / surf / slstatus
 
 编进 `~/.local`（也可 `sudo make install` 到 `/usr/local`）。PATH 里若已有发行版二进制，优先用刚装的路径，zsh 下先 `rehash`。
 
 ```bash
 cd ~/git/suckless
-for c in dwm st dmenu tabbed surf; do
+for c in dwm st dmenu tabbed surf slstatus; do
   ( cd "$c" && rm -f config.h && make && make PREFIX="$HOME/.local" install )
 done
 ```
@@ -68,9 +68,12 @@ sudo make install
 dmenu 已有 `-P`。在 dwm 的 xinitrc 里、`exec dwm` 之前：
 
 ```sh
+slstatus &
 mini-polkit "dmenu -P -c -bw 2 -p Password:" &
 exec dwm
 ```
+
+Hyprland **不要**起 slstatus。栏右显示 CPU%、内存%、星期日期时间（`slstatus/config.def.h`）。Xephyr 里同一 `DISPLAY` 再开 slstatus。
 
 同一会话不要再起其它 polkit agent。`polkit.service` 不用改。测：`pkexec echo ok`。
 
@@ -151,5 +154,5 @@ Mod+Space 拉起。默认横条；竖列加 `-l 20`。
 ## 相关
 
 - [doc/index.md](doc/index.md)
-- [dwm](https://github.com/liuxinyang1984/dwm) · [st](https://github.com/liuxinyang1984/st) · [dmenu](https://github.com/liuxinyang1984/dmenu) · [tabbed](https://github.com/liuxinyang1984/tabbed) · [surf](https://github.com/liuxinyang1984/surf) · [mini-polkit](https://github.com/liuxinyang1984/mini-polkit)
-- 上游：[dwm](https://dwm.suckless.org/) · [st](https://st.suckless.org/) · [dmenu](https://tools.suckless.org/dmenu/) · [tabbed](https://tools.suckless.org/tabbed/) · [surf](https://surf.suckless.org/)
+- [dwm](https://github.com/liuxinyang1984/dwm) · [st](https://github.com/liuxinyang1984/st) · [dmenu](https://github.com/liuxinyang1984/dmenu) · [tabbed](https://github.com/liuxinyang1984/tabbed) · [surf](https://github.com/liuxinyang1984/surf) · [slstatus](https://github.com/liuxinyang1984/-slstatus) · [mini-polkit](https://github.com/liuxinyang1984/mini-polkit)
+- 上游：[dwm](https://dwm.suckless.org/) · [st](https://st.suckless.org/) · [dmenu](https://tools.suckless.org/dmenu/) · [tabbed](https://tools.suckless.org/tabbed/) · [surf](https://surf.suckless.org/) · [slstatus](https://tools.suckless.org/slstatus/)
