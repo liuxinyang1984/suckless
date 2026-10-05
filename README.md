@@ -1,10 +1,10 @@
 # suckless
 
-个人 fork 的 dwm / st / dmenu，外加 [mini-polkit](https://github.com/liuxinyang1984/mini-polkit)。父仓库只放说明和子模块指针；补丁历史在各子仓里。
+个人 fork 的 dwm / st / dmenu / tabbed / surf，外加 [mini-polkit](https://github.com/liuxinyang1984/mini-polkit)。父仓库只放说明和子模块指针；补丁历史在各子仓里。
 
 日常桌面是 Hyprland。这套给 X11 / dwm 用。当前 dwm 的 **Mod 是 Alt**（Hyprland 占 Super；切到 dwm 桌面再改 `Mod4Mask`）。键位以各仓 `config.def.h` 为准（dmenu 的 Ctrl 键在 `dmenu.c`）。改 `config.def.h` 后删 `config.h` 再编译。
 
-GitHub：`git@github.com:liuxinyang1984/<仓名>.git`（`suckless`、`dwm`、`st`、`dmenu`、`mini-polkit`）。
+GitHub：`git@github.com:liuxinyang1984/<仓名>.git`（`suckless`、`dwm`、`st`、`dmenu`、`tabbed`、`surf`、`mini-polkit`）。surf 跟踪上游分支 `surf-webkit2`。
 
 ## 克隆
 
@@ -25,23 +25,33 @@ git submodule update --init --recursive
 
 ```bash
 sudo pacman -S base-devel libx11 libxft libxext libxinerama fontconfig freetype2 \
-  libx11-xcb xcb-util libxcb
+  libx11-xcb xcb-util libxcb \
+  gtk3 gcr webkit2gtk-4.1
 ```
 
-dwm swallow 需要 xcb。拉 GitHub 不稳时终端 `proxyon`。
+dwm swallow 需要 xcb。surf 需要 GTK3 / GCR / WebKitGTK（`pkg-config` 名见 `surf/config.mk`）。拉 GitHub 不稳时终端 `proxyon`。
 
-## 安装 dwm / st / dmenu
+## 安装 dwm / st / dmenu / tabbed / surf
 
 编进 `~/.local`（也可 `sudo make install` 到 `/usr/local`）。PATH 里若已有发行版二进制，优先用刚装的路径，zsh 下先 `rehash`。
 
 ```bash
 cd ~/git/suckless
-for c in dwm st dmenu; do
+for c in dwm st dmenu tabbed surf; do
   ( cd "$c" && rm -f config.h && make && make PREFIX="$HOME/.local" install )
 done
 ```
 
 改配置后对那个目录重复 `rm -f config.h && make && make PREFIX=$HOME/.local install`。dwm 要重启才吃新键位。
+
+常用启动：
+
+```bash
+tabbed -c st -e
+tabbed -c surf -e https://example.com
+# 或用仓内脚本（会复用已有 tabbed）
+surf-open.sh https://example.com
+```
 
 Xephyr 嵌套 X11 调试见 [doc/xephyr.md](doc/xephyr.md)。从 Hyprland 往里送程序：`DISPLAY=:2 …`。
 
@@ -141,5 +151,5 @@ Mod+Space 拉起。默认横条；竖列加 `-l 20`。
 ## 相关
 
 - [doc/index.md](doc/index.md)
-- [dwm](https://github.com/liuxinyang1984/dwm) · [st](https://github.com/liuxinyang1984/st) · [dmenu](https://github.com/liuxinyang1984/dmenu) · [mini-polkit](https://github.com/liuxinyang1984/mini-polkit)
-- 上游：[dwm](https://dwm.suckless.org/) · [st](https://st.suckless.org/) · [dmenu](https://tools.suckless.org/dmenu/)
+- [dwm](https://github.com/liuxinyang1984/dwm) · [st](https://github.com/liuxinyang1984/st) · [dmenu](https://github.com/liuxinyang1984/dmenu) · [tabbed](https://github.com/liuxinyang1984/tabbed) · [surf](https://github.com/liuxinyang1984/surf) · [mini-polkit](https://github.com/liuxinyang1984/mini-polkit)
+- 上游：[dwm](https://dwm.suckless.org/) · [st](https://st.suckless.org/) · [dmenu](https://tools.suckless.org/dmenu/) · [tabbed](https://tools.suckless.org/tabbed/) · [surf](https://surf.suckless.org/)

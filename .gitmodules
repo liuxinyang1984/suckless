@@ -10,3 +10,10 @@
 [submodule "mini-polkit"]
 	path = mini-polkit
 	url = git@github.com:liuxinyang1984/mini-polkit.git
+[submodule "tabbed"]
+	path = tabbed
+	url = git@github.com:liuxinyang1984/tabbed.git
+[submodule "surf"]
+	path = surf
+	url = git@github.com:liuxinyang1984/surf.git
+	branch = surf-webkit2
