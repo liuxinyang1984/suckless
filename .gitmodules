@@ -1,0 +1,12 @@
+[submodule "dwm"]
+	path = dwm
+	url = git@github.com:liuxinyang1984/dwm.git
+[submodule "st"]
+	path = st
+	url = git@github.com:liuxinyang1984/st.git
+[submodule "dmenu"]
+	path = dmenu
+	url = git@github.com:liuxinyang1984/dmenu.git
+[submodule "mini-polkit"]
+	path = mini-polkit
+	url = git@github.com:liuxinyang1984/mini-polkit.git
