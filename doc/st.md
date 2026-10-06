@@ -14,10 +14,18 @@
 cd st && git log -1 --oneline
 ```
 
-## 依赖（Arch）
+## 依赖
+
+Arch：
 
 ```bash
 sudo pacman -S base-devel libx11 libxft libxext fontconfig freetype2
+```
+
+Alpine：
+
+```bash
+doas apk add build-base libx11-dev libxft-dev libxext-dev fontconfig-dev freetype-dev
 ```
 
 ## 构建

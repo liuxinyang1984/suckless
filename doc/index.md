@@ -28,6 +28,9 @@ suckless/
 | [st.md](st.md) | st 构建与 patch |
 | [dwm.md](dwm.md) | dwm 构建与 patch |
 | [dmenu.md](dmenu.md) | dmenu 构建与 patch |
+| [slstatus.md](slstatus.md) | 状态栏 |
+| [tabbed.md](tabbed.md) | 标签容器 |
+| [surf.md](surf.md) | 浏览器 |
 
 ```bash
 git clone --recursive git@github.com:liuxinyang1984/suckless.git

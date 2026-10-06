@@ -21,7 +21,9 @@ git submodule update --init --recursive
 
 各子仓另有上游 `origin`（suckless.org 或 mini-polkit 原作者），GitHub 在 remote `github`。推自己的补丁：`cd dwm && git push github`。
 
-## 依赖（Arch）
+## 依赖
+
+Arch：
 
 ```bash
 sudo pacman -S base-devel libx11 libxft libxext libxinerama fontconfig freetype2 \
@@ -29,7 +31,23 @@ sudo pacman -S base-devel libx11 libxft libxext libxinerama fontconfig freetype2
   gtk3 gcr webkit2gtk-4.1
 ```
 
+Alpine：
+
+```bash
+doas apk add build-base libx11-dev libxft-dev libxext-dev libxinerama-dev \
+  fontconfig-dev freetype-dev libxcb-dev xcb-util-dev \
+  gtk+3.0-dev gcr-dev webkit2gtk-4.1-dev pkgconf
+```
+
 dwm swallow 需要 xcb。surf 需要 GTK3 / GCR / WebKitGTK（`pkg-config` 名见 `surf/config.mk`）。拉 GitHub 不稳时终端 `proxyon`。
+
+也可用 [dotfiles](https://github.com/liuxinyang1984/dotfiles) 的安装脚本（同样这六个，并装 fontconfig）：
+
+```bash
+~/git/dotfiles/install.sh desktop:suckless
+```
+
+mini-polkit：`INSTALL_POLKIT=1 ~/git/dotfiles/install.sh desktop:suckless`。
 
 ## 安装 dwm / st / dmenu / tabbed / surf / slstatus
 
@@ -62,7 +80,10 @@ Hyprland **不要**用（继续 hyprpolkitagent）。只给 dwm 的 X 会话。
 ```bash
 cd ~/git/suckless/mini-polkit
 make
+# Arch:
 sudo make install
+# Alpine:
+doas make install
 ```
 
 dmenu 已有 `-P`。在 dwm 的 xinitrc 里、`exec dwm` 之前：
