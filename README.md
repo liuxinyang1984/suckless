@@ -45,22 +45,26 @@ dwm swallow 需要 xcb。surf 需要 GTK3 / GCR / WebKitGTK（`pkg-config` 名�
 
 ```bash
 ~/git/dotfiles/install.sh desktop:suckless
+# 个人：SUCKLESS_USER=1 ./install.sh desktop:suckless
+# 部分组件：SUCKLESS_COMPONENTS="dwm st" ./install.sh desktop:suckless
 ```
 
-mini-polkit：`INSTALL_POLKIT=1 ~/git/dotfiles/install.sh desktop:suckless`。
+mini-polkit：`INSTALL_POLKIT=1 ~/git/dotfiles/install.sh desktop:suckless`（或 `./install.sh --polkit` / `./install.sh mini-polkit`）。
 
 ## 安装 dwm / st / dmenu / tabbed / surf / slstatus
 
-编进 `~/.local`（也可 `sudo make install` 到 `/usr/local`）。PATH 里若已有发行版二进制，优先用刚装的路径，zsh 下先 `rehash`。
+默认：`make` 后 **`doas`/`sudo make install`**（各仓 `config.mk` PREFIX，一般为 `/usr/local`）。`--user` 则装到 `~/.local` 且不提权。可指定组件单独安装。
 
 ```bash
-cd ~/git/suckless
-for c in dwm st dmenu tabbed surf slstatus; do
-  ( cd "$c" && rm -f config.h && make && make PREFIX="$HOME/.local" install )
-done
+~/git/suckless/install.sh                 # 系统 PREFIX，六个主程序
+~/git/suckless/install.sh --user          # 全部 → ~/.local
+~/git/suckless/install.sh dwm st          # 只装 dwm、st（系统）
+~/git/suckless/install.sh --user dmenu    # 只装 dmenu → ~/.local
+~/git/suckless/install.sh mini-polkit     # 只装 polkit（需提权）
+~/git/suckless/install.sh --help
 ```
 
-改配置后对那个目录重复 `rm -f config.h && make && make PREFIX=$HOME/.local install`。dwm 要重启才吃新键位。
+改配置后对该目录：`rm -f config.h && make && doas make install`（或 `--user` 时 `PREFIX=$HOME/.local`）。dwm 要重启才吃新键位。
 
 常用启动：
 
@@ -78,12 +82,8 @@ Xephyr 嵌套 X11 调试见 [doc/xephyr.md](doc/xephyr.md)。从 Hyprland 往里
 Hyprland **不要**用（继续 hyprpolkitagent）。只给 dwm 的 X 会话。
 
 ```bash
-cd ~/git/suckless/mini-polkit
-make
-# Arch:
-sudo make install
-# Alpine:
-doas make install
+~/git/suckless/install.sh --polkit
+# 或：~/git/suckless/install.sh mini-polkit
 ```
 
 dmenu 已有 `-P`。在 dwm 的 xinitrc 里、`exec dwm` 之前：
