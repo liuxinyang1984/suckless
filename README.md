@@ -137,8 +137,8 @@ Hyprland **不要**起 slstatus。栏右显示 CPU%、内存%、星期日期时�
 
 | 键 | 作用 |
 |----|------|
-| Ctrl+= 或 Ctrl++ | 字号 + |
-| Ctrl+- | 字号 − |
+| Ctrl+Shift+=（Ctrl++） | 字号 + |
+| Ctrl+Shift+-（Ctrl+_） | 字号 − |
 | Ctrl+0 | 字号复位 |
 | 小键盘 Ctrl++/−/0 | 同上 |
 | Ctrl+Shift+j / k | 回滚下一行 / 上一行 |
@@ -150,6 +150,13 @@ Hyprland **不要**起 slstatus。栏右显示 CPU%、内存%、星期日期时�
 | 中键 | 粘贴选区 |
 
 备用屏（vim 全屏等）不回滚。
+
+已打 fix-keyboard-input：Shift+Enter、Alt+Shift+Enter、Ctrl+Tab、Ctrl+Shift+字母等组合以 CSI u（`ESC [ 码点 ; 修饰值 u`）发给程序，上表之外的组合都交给终端内程序。在 tmux 里用需开启：
+
+```tmux
+set -s extended-keys on
+set -as terminal-features 'st*:extkeys'
+```
 
 ## dmenu 快捷键
 
