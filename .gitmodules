@@ -1,18 +1,23 @@
 [submodule "dwm"]
 	path = dwm
 	url = git@github.com:liuxinyang1984/dwm.git
+	branch = master
 [submodule "st"]
 	path = st
 	url = git@github.com:liuxinyang1984/st.git
+	branch = master
 [submodule "dmenu"]
 	path = dmenu
 	url = git@github.com:liuxinyang1984/dmenu.git
+	branch = master
 [submodule "mini-polkit"]
 	path = mini-polkit
 	url = git@github.com:liuxinyang1984/mini-polkit.git
+	branch = main
 [submodule "tabbed"]
 	path = tabbed
 	url = git@github.com:liuxinyang1984/tabbed.git
+	branch = master
 [submodule "surf"]
 	path = surf
 	url = git@github.com:liuxinyang1984/surf.git
@@ -20,3 +25,4 @@
 [submodule "slstatus"]
 	path = slstatus
 	url = git@github.com:liuxinyang1984/slstatus.git
+	branch = master

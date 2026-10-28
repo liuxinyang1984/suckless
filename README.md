@@ -1,10 +1,10 @@
 # suckless
 
-个人 fork 的 dwm / st / dmenu / tabbed / surf / slstatus，外加 [mini-polkit](https://github.com/liuxinyang1984/mini-polkit)。父仓库只放说明和子模块指针；补丁历史在各子仓里。
+个人 fork 的 dwm / st / dmenu / tabbed / surf / slstatus，外加 [mini-polkit](https://github.com/liuxinyang1984/mini-polkit)。父仓库只放说明和子模块；补丁历史在各子仓里。各子模块在 `.gitmodules` 里声明跟踪分支（多数 `master`，mini-polkit `main`，surf `surf-webkit2`），**不刻意钉死旧 commit**——日常用 `--remote` 拉分支尖。
 
 日常桌面是 Hyprland。这套给 X11 / dwm 用。当前 dwm 的 **Mod 是 Alt**（Hyprland 占 Super；切到 dwm 桌面再改 `Mod4Mask`）。键位以各仓 `config.def.h` 为准（dmenu 的 Ctrl 键在 `dmenu.c`）。改 `config.def.h` 后删 `config.h` 再编译。
 
-GitHub：`git@github.com:liuxinyang1984/<仓名>.git`（`suckless`、`dwm`、`st`、`dmenu`、`tabbed`、`surf`、`slstatus`、`mini-polkit`）。surf 跟踪上游分支 `surf-webkit2`。
+GitHub：`git@github.com:liuxinyang1984/<仓名>.git`（`suckless`、`dwm`、`st`、`dmenu`、`tabbed`、`surf`、`slstatus`、`mini-polkit`）。
 
 ## 克隆
 
@@ -13,11 +13,14 @@ git clone --recursive git@github.com:liuxinyang1984/suckless.git
 cd suckless
 ```
 
-已有目录补子模块：
+已有目录补子模块，并跟到各自分支最新：
 
 ```bash
-git submodule update --init --recursive
+git submodule sync --recursive
+git submodule update --init --remote --recursive
 ```
+
+只要检出父仓记下的 SHA（不跟分支尖）：`git submodule update --init --recursive`。
 
 各子仓另有上游 `origin`（suckless.org 或 mini-polkit 原作者），GitHub 在 remote `github`。推自己的补丁：`cd dwm && git push github`。
 
