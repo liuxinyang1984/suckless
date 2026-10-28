@@ -2,7 +2,9 @@
 
 个人 fork 的 dwm / st / dmenu / tabbed / surf / slstatus，外加 [mini-polkit](https://github.com/liuxinyang1984/mini-polkit)。父仓库只放说明和子模块；补丁历史在各子仓里。各子模块在 `.gitmodules` 里声明跟踪分支（多数 `master`，mini-polkit `main`，surf `surf-webkit2`），**不刻意钉死旧 commit**——日常用 `--remote` 拉分支尖。
 
-日常桌面是 Hyprland。这套给 X11 / dwm 用。当前 dwm 的 **Mod 是 Alt**（Hyprland 占 Super；切到 dwm 桌面再改 `Mod4Mask`）。键位以各仓 `config.def.h` 为准（dmenu 的 Ctrl 键在 `dmenu.c`）。改 `config.def.h` 后删 `config.h` 再编译。
+日常桌面是 Hyprland。这套给 X11 / dwm 用。当前 dwm 的 **Mod 是 Super（`Mod4Mask`）**；与 Hyprland 同机时勿同时抢 Super。键位以各仓 `config.def.h` 为准（dmenu 的 Ctrl 键在 `dmenu.c`）。改 `config.def.h` 后删本地 `config.h`（已 gitignore）再编译。
+
+X11 会话启动（`startx` / kiosk / dwm / picom）见父仓 [dotfiles `config/x11/`](https://github.com/liuxinyang1984/dotfiles/tree/master/config/x11) 与根 README「X11 会话」。
 
 GitHub：`git@github.com:liuxinyang1984/<仓名>.git`（`suckless`、`dwm`、`st`、`dmenu`、`tabbed`、`surf`、`slstatus`、`mini-polkit`）。
 
