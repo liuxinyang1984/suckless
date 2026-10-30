@@ -112,8 +112,9 @@ Hyprland **不要**起 dwmblocks。默认块：输入法（`sb-fcitx`）+ 日期
 | Mod+` | scratchpad |
 | Mod+b | 显隐状态栏 |
 | Mod+j / k | 焦点下 / 上 |
+| Mod+h / l | 焦点左 / 右（focusstack） |
 | Mod+Shift+j / k | 窗口在栈里下移 / 上移 |
-| Mod+Alt+h / l | 主区域变窄 / 变宽 |
+| Super+Alt+h / l | 主区域变窄 / 变宽 |
 | Mod+i / d | master 窗口数 +1 / −1 |
 | Mod+Ctrl+Return | 当前窗与 master 交换 |
 | Mod+Tab | 回到上次 tag |
