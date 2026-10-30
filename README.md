@@ -1,12 +1,12 @@
 # suckless
 
-个人 fork 的 dwm / st / dmenu / tabbed / surf / slstatus，外加 [mini-polkit](https://github.com/liuxinyang1984/mini-polkit)。父仓库只放说明和子模块；补丁历史在各子仓里。各子模块在 `.gitmodules` 里声明跟踪分支（多数 `master`，mini-polkit `main`，surf `surf-webkit2`），**不刻意钉死旧 commit**——日常用 `--remote` 拉分支尖。
+个人 fork 的 dwm / st / dmenu / tabbed / surf / dwmblocks-async / slstatus，外加 [mini-polkit](https://github.com/liuxinyang1984/mini-polkit) 与状态脚本 [shell_scipt](https://github.com/liuxinyang1984/shell_scipt)。父仓库只放说明和子模块；补丁历史在各子仓里。各子模块在 `.gitmodules` 里声明跟踪分支（多数 `master`，mini-polkit/`dwmblocks`/`shell_script` 为 `main`，surf `surf-webkit2`），**不刻意钉死旧 commit**——日常用 `--remote` 拉分支尖。
 
 日常桌面是 Hyprland。这套给 X11 / dwm 用。当前 dwm 的 **Mod 是 Super（`Mod4Mask`）**；与 Hyprland 同机时勿同时抢 Super。键位以各仓 `config.def.h` 为准（dmenu 的 Ctrl 键在 `dmenu.c`）。改 `config.def.h` 后删本地 `config.h`（已 gitignore）再编译。
 
 X11 会话启动（`startx` / kiosk / dwm / picom）见父仓 [dotfiles `config/x11/`](https://github.com/liuxinyang1984/dotfiles/tree/master/config/x11) 与根 README「X11 会话」。
 
-GitHub：`git@github.com:liuxinyang1984/<仓名>.git`（`suckless`、`dwm`、`st`、`dmenu`、`tabbed`、`surf`、`slstatus`、`mini-polkit`）。
+GitHub：`git@github.com:liuxinyang1984/<仓名>.git`（`suckless`、`dwm`、`st`、`dmenu`、`tabbed`、`surf`、`dwmblocks-async`、`shell_scipt`、`slstatus`、`mini-polkit`）。
 
 ## 克隆
 
@@ -94,12 +94,12 @@ Hyprland **不要**用（继续 hyprpolkitagent）。只给 dwm 的 X 会话。
 dmenu 已有 `-P`。在 dwm 的 xinitrc 里、`exec dwm` 之前：
 
 ```sh
-slstatus &
+dwmblocks &
 mini-polkit "dmenu -P -c -bw 2 -p Password:" &
 exec dwm
 ```
 
-Hyprland **不要**起 slstatus。栏右显示 CPU%、内存%、星期日期时间（`slstatus/config.def.h`）。Xephyr 里同一 `DISPLAY` 再开 slstatus。
+Hyprland **不要**起 dwmblocks/slstatus。默认块：输入法（`sb-fcitx`）+ 日期时间（`sb-datetime`），配置在 dwmblocks fork 的 `config.h`，脚本在子模块 `shell_script/status/`。Xephyr 里同一 `DISPLAY` 再开 `dwmblocks`。
 
 同一会话不要再起其它 polkit agent。`polkit.service` 不用改。测：`pkexec echo ok`。
 

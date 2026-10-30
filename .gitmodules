@@ -26,3 +26,11 @@
 	path = slstatus
 	url = git@github.com:liuxinyang1984/slstatus.git
 	branch = master
+[submodule "dwmblocks"]
+	path = dwmblocks
+	url = git@github.com:liuxinyang1984/dwmblocks-async.git
+	branch = main
+[submodule "shell_script"]
+	path = shell_script
+	url = git@github.com:liuxinyang1984/shell_scipt.git
+	branch = main

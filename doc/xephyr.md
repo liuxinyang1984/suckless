@@ -18,7 +18,7 @@ dwm
 打靶：
 
 ```bash
-DISPLAY=:2 slstatus &
+DISPLAY=:2 dwmblocks &
 DISPLAY=:2 st
 DISPLAY=:2 dmenu_run -c -bw 2
 ```

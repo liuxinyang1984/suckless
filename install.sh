@@ -7,7 +7,7 @@ set -e
 ROOT="$(cd "$(dirname "$0")" && pwd)"
 MODE=system
 INSTALL_POLKIT=0
-ALL_COMPONENTS="dwm st dmenu slstatus tabbed surf"
+ALL_COMPONENTS="dwm st dmenu dwmblocks tabbed surf"
 # 未在命令行点名组件时，装全部
 SELECTED=""
 
@@ -22,13 +22,15 @@ usage() {
   -h, --help   显示本说明
 
 组件（可多选；省略则全部）:
-  dwm  st  dmenu  slstatus  tabbed  surf  mini-polkit
+  dwm  st  dmenu  dwmblocks  tabbed  surf  mini-polkit
+  （slstatus 仍可显式安装；默认状态栏为 dwmblocks-async）
 
 示例:
   ./install.sh                    # 系统 PREFIX，六个主程序
   ./install.sh --user             # 全部 → ~/.local
   ./install.sh dwm st             # 只装 dwm、st（系统）
   ./install.sh --user dmenu       # 只装 dmenu → ~/.local
+  ./install.sh dwmblocks          # 状态栏 + status/sb-* 脚本
   ./install.sh mini-polkit        # 只装 polkit（需提权）
   ./install.sh --polkit dwm       # dwm + mini-polkit
 
@@ -38,7 +40,7 @@ EOF
 
 is_component() {
     case "$1" in
-        dwm|st|dmenu|slstatus|tabbed|surf|mini-polkit) return 0 ;;
+        dwm|st|dmenu|dwmblocks|slstatus|tabbed|surf|mini-polkit) return 0 ;;
         *) return 1 ;;
     esac
 }
@@ -117,6 +119,29 @@ if [ "$MODE" = system ] || [ "$INSTALL_POLKIT" = 1 ]; then
     need_root
 fi
 
+install_status_scripts() {
+    # shell_script/status/sb-* → $1/bin（须在 PATH 里，供 dwmblocks 调用）
+    scripts="$ROOT/shell_script/status"
+    if [ ! -d "$scripts" ]; then
+        echo "缺少 $scripts（git submodule update --init --recursive）" >&2
+        exit 1
+    fi
+    destbin="$1/bin"
+    if [ "$MODE" = user ]; then
+        mkdir -p "$destbin"
+        for s in "$scripts"/sb-*; do
+            [ -f "$s" ] || continue
+            install -m 755 "$s" "$destbin/$(basename "$s")"
+        done
+    else
+        run_root mkdir -p "$destbin"
+        for s in "$scripts"/sb-*; do
+            [ -f "$s" ] || continue
+            run_root install -m 755 "$s" "$destbin/$(basename "$s")"
+        done
+    fi
+}
+
 for c in $MAIN; do
     src="$ROOT/$c"
     if [ ! -d "$src" ]; then
@@ -124,6 +149,24 @@ for c in $MAIN; do
         exit 1
     fi
     echo "==== $c ===="
+    if [ "$c" = dwmblocks ]; then
+        # config.h 在 fork 内维护；勿 rm（不是 config.def.h 生成物）
+        (
+            cd "$src"
+            make
+            if [ "$MODE" = user ]; then
+                echo "安装 → $HOME/.local"
+                make PREFIX="$HOME/.local" install
+                install_status_scripts "$HOME/.local"
+            else
+                echo "安装 → PREFIX（doas/sudo make install）"
+                run_root make install
+                install_status_scripts /usr/local
+            fi
+            make clean
+        )
+        continue
+    fi
     (
         cd "$src"
         rm -f config.h

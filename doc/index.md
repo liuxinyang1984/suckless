@@ -28,7 +28,8 @@ suckless/
 | [st.md](st.md) | st 构建与 patch |
 | [dwm.md](dwm.md) | dwm 构建与 patch |
 | [dmenu.md](dmenu.md) | dmenu 构建与 patch |
-| [slstatus.md](slstatus.md) | 状态栏 |
+| [dwmblocks.md](dwmblocks.md) | 状态栏（dwmblocks-async；默认） |
+| [slstatus.md](slstatus.md) | 旧状态栏（可选） |
 | [tabbed.md](tabbed.md) | 标签容器 |
 | [surf.md](surf.md) | 浏览器 |
 
