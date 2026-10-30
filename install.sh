@@ -23,14 +23,13 @@ usage() {
 
 组件（可多选；省略则全部）:
   dwm  st  dmenu  dwmblocks  tabbed  surf  mini-polkit
-  （slstatus 仍可显式安装；默认状态栏为 dwmblocks-async）
 
 示例:
   ./install.sh                    # 系统 PREFIX，六个主程序
   ./install.sh --user             # 全部 → ~/.local
   ./install.sh dwm st             # 只装 dwm、st（系统）
   ./install.sh --user dmenu       # 只装 dmenu → ~/.local
-  ./install.sh dwmblocks          # 状态栏 + status/sb-* 脚本
+  ./install.sh dwmblocks          # 状态栏 + shell_script/status 脚本
   ./install.sh mini-polkit        # 只装 polkit（需提权）
   ./install.sh --polkit dwm       # dwm + mini-polkit
 
@@ -40,7 +39,7 @@ EOF
 
 is_component() {
     case "$1" in
-        dwm|st|dmenu|dwmblocks|slstatus|tabbed|surf|mini-polkit) return 0 ;;
+        dwm|st|dmenu|dwmblocks|tabbed|surf|mini-polkit) return 0 ;;
         *) return 1 ;;
     esac
 }

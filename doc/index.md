@@ -1,6 +1,6 @@
 # suckless
 
-父仓库：文档 + 子模块。源码与补丁历史在 [dwm](https://github.com/liuxinyang1984/dwm)、[st](https://github.com/liuxinyang1984/st)、[dmenu](https://github.com/liuxinyang1984/dmenu)、[tabbed](https://github.com/liuxinyang1984/tabbed)、[surf](https://github.com/liuxinyang1984/surf)、[slstatus](https://github.com/liuxinyang1984/slstatus)、[mini-polkit](https://github.com/liuxinyang1984/mini-polkit)。
+父仓库：文档 + 子模块。源码与补丁历史在 [dwm](https://github.com/liuxinyang1984/dwm)、[st](https://github.com/liuxinyang1984/st)、[dmenu](https://github.com/liuxinyang1984/dmenu)、[tabbed](https://github.com/liuxinyang1984/tabbed)、[surf](https://github.com/liuxinyang1984/surf)、[dwmblocks-async](https://github.com/liuxinyang1984/dwmblocks-async)、[shell_script](https://github.com/liuxinyang1984/shell_script)、[mini-polkit](https://github.com/liuxinyang1984/mini-polkit)。
 
 安装和快捷键见 [README.md](../README.md)。
 
@@ -10,13 +10,14 @@
 suckless/
 ├── README.md
 ├── doc/
-├── dwm/          # submodule
-├── dmenu/        # submodule
-├── st/           # submodule
-├── tabbed/       # submodule
-├── surf/         # submodule（分支 surf-webkit2）
-├── slstatus/     # submodule
-└── mini-polkit/  # submodule
+├── dwm/           # submodule
+├── dmenu/         # submodule
+├── st/            # submodule
+├── tabbed/        # submodule
+├── surf/          # submodule（分支 surf-webkit2）
+├── dwmblocks/     # submodule（dwmblocks-async）
+├── shell_script/  # submodule（status/sb-*）
+└── mini-polkit/   # submodule
 ```
 
 ## 文档
@@ -28,8 +29,7 @@ suckless/
 | [st.md](st.md) | st 构建与 patch |
 | [dwm.md](dwm.md) | dwm 构建与 patch |
 | [dmenu.md](dmenu.md) | dmenu 构建与 patch |
-| [dwmblocks.md](dwmblocks.md) | 状态栏（dwmblocks-async；默认） |
-| [slstatus.md](slstatus.md) | 旧状态栏（可选） |
+| [dwmblocks.md](dwmblocks.md) | 状态栏（dwmblocks-async） |
 | [tabbed.md](tabbed.md) | 标签容器 |
 | [surf.md](surf.md) | 浏览器 |
 
@@ -46,4 +46,4 @@ git clone --recursive git@github.com:liuxinyang1984/suckless.git
 - [suckless st](https://st.suckless.org/)
 - [suckless tabbed](https://tools.suckless.org/tabbed/)
 - [suckless surf](https://surf.suckless.org/)
-- [suckless slstatus](https://tools.suckless.org/slstatus/)
+- [dwmblocks-async](https://github.com/UtkarshVerma/dwmblocks-async)

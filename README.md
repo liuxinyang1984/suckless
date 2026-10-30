@@ -1,12 +1,12 @@
 # suckless
 
-个人 fork 的 dwm / st / dmenu / tabbed / surf / dwmblocks-async / slstatus，外加 [mini-polkit](https://github.com/liuxinyang1984/mini-polkit) 与状态脚本 [shell_script](https://github.com/liuxinyang1984/shell_script)。父仓库只放说明和子模块；补丁历史在各子仓里。各子模块在 `.gitmodules` 里声明跟踪分支（多数 `master`，mini-polkit/`dwmblocks`/`shell_script` 为 `main`，surf `surf-webkit2`），**不刻意钉死旧 commit**——日常用 `--remote` 拉分支尖。
+个人 fork 的 dwm / st / dmenu / tabbed / surf / dwmblocks-async，外加 [mini-polkit](https://github.com/liuxinyang1984/mini-polkit) 与状态脚本 [shell_script](https://github.com/liuxinyang1984/shell_script)。父仓库只放说明和子模块；补丁历史在各子仓里。各子模块在 `.gitmodules` 里声明跟踪分支（多数 `master`，mini-polkit/`dwmblocks`/`shell_script` 为 `main`，surf `surf-webkit2`），**不刻意钉死旧 commit**——日常用 `--remote` 拉分支尖。
 
 日常桌面是 Hyprland。这套给 X11 / dwm 用。当前 dwm 的 **Mod 是 Super（`Mod4Mask`）**；与 Hyprland 同机时勿同时抢 Super。键位以各仓 `config.def.h` 为准（dmenu 的 Ctrl 键在 `dmenu.c`）。改 `config.def.h` 后删本地 `config.h`（已 gitignore）再编译。
 
 X11 会话启动（`startx` / kiosk / dwm / picom）见父仓 [dotfiles `config/x11/`](https://github.com/liuxinyang1984/dotfiles/tree/master/config/x11) 与根 README「X11 会话」。
 
-GitHub：`git@github.com:liuxinyang1984/<仓名>.git`（`suckless`、`dwm`、`st`、`dmenu`、`tabbed`、`surf`、`dwmblocks-async`、`shell_script`、`slstatus`、`mini-polkit`）。
+GitHub：`git@github.com:liuxinyang1984/<仓名>.git`（`suckless`、`dwm`、`st`、`dmenu`、`tabbed`、`surf`、`dwmblocks-async`、`shell_script`、`mini-polkit`）。
 
 ## 克隆
 
@@ -56,7 +56,7 @@ dwm swallow 需要 xcb。surf 需要 GTK3 / GCR / WebKitGTK（`pkg-config` 名�
 
 mini-polkit：`INSTALL_POLKIT=1 ~/git/dotfiles/install.sh desktop:suckless`（或 `./install.sh --polkit` / `./install.sh mini-polkit`）。
 
-## 安装 dwm / st / dmenu / tabbed / surf / slstatus
+## 安装 dwm / st / dmenu / tabbed / surf / dwmblocks
 
 默认：`make` 后 **`doas`/`sudo make install`**（各仓 `config.mk` PREFIX，一般为 `/usr/local`）。`--user` 则装到 `~/.local` 且不提权。可指定组件单独安装。
 
@@ -99,7 +99,7 @@ mini-polkit "dmenu -P -c -bw 2 -p Password:" &
 exec dwm
 ```
 
-Hyprland **不要**起 dwmblocks/slstatus。默认块：输入法（`sb-fcitx`）+ 日期时间（`sb-datetime`），配置在 dwmblocks fork 的 `config.h`，脚本在子模块 `shell_script/status/`。Xephyr 里同一 `DISPLAY` 再开 `dwmblocks`。
+Hyprland **不要**起 dwmblocks。默认块：输入法（`sb-fcitx`）+ 日期时间（`sb-datetime`），配置在 dwmblocks fork 的 `config.h`，脚本在子模块 `shell_script/status/`。Xephyr 里同一 `DISPLAY` 再开 `dwmblocks`。
 
 同一会话不要再起其它 polkit agent。`polkit.service` 不用改。测：`pkexec echo ok`。
 
@@ -187,5 +187,5 @@ Mod+Space 拉起。默认横条；竖列加 `-l 20`。
 ## 相关
 
 - [doc/index.md](doc/index.md)
-- [dwm](https://github.com/liuxinyang1984/dwm) · [st](https://github.com/liuxinyang1984/st) · [dmenu](https://github.com/liuxinyang1984/dmenu) · [tabbed](https://github.com/liuxinyang1984/tabbed) · [surf](https://github.com/liuxinyang1984/surf) · [slstatus](https://github.com/liuxinyang1984/slstatus) · [mini-polkit](https://github.com/liuxinyang1984/mini-polkit)
-- 上游：[dwm](https://dwm.suckless.org/) · [st](https://st.suckless.org/) · [dmenu](https://tools.suckless.org/dmenu/) · [tabbed](https://tools.suckless.org/tabbed/) · [surf](https://surf.suckless.org/) · [slstatus](https://tools.suckless.org/slstatus/)
+- [dwm](https://github.com/liuxinyang1984/dwm) · [st](https://github.com/liuxinyang1984/st) · [dmenu](https://github.com/liuxinyang1984/dmenu) · [tabbed](https://github.com/liuxinyang1984/tabbed) · [surf](https://github.com/liuxinyang1984/surf) · [dwmblocks-async](https://github.com/liuxinyang1984/dwmblocks-async) · [shell_script](https://github.com/liuxinyang1984/shell_script) · [mini-polkit](https://github.com/liuxinyang1984/mini-polkit)
+- 上游：[dwm](https://dwm.suckless.org/) · [st](https://st.suckless.org/) · [dmenu](https://tools.suckless.org/dmenu/) · [tabbed](https://tools.suckless.org/tabbed/) · [surf](https://surf.suckless.org/) · [dwmblocks-async](https://github.com/UtkarshVerma/dwmblocks-async)
