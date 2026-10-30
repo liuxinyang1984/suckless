@@ -2,7 +2,7 @@
 
 状态栏：[liuxinyang1984/dwmblocks-async](https://github.com/liuxinyang1984/dwmblocks-async)（上游 [UtkarshVerma/dwmblocks-async](https://github.com/UtkarshVerma/dwmblocks-async)）。子模块 `dwmblocks/`，二进制名仍为 `dwmblocks`。
 
-脚本在独立仓 [shell_scipt](https://github.com/liuxinyang1984/shell_scipt)（子模块 `shell_script/`；GitHub 仓名暂缺字母 r，建议改名为 `shell_script`）：
+脚本在独立仓 [shell_script](https://github.com/liuxinyang1984/shell_script)（子模块 `shell_script/`）：
 
 | 脚本 | 作用 |
 |------|------|

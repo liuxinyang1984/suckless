@@ -32,5 +32,5 @@
 	branch = main
 [submodule "shell_script"]
 	path = shell_script
-	url = git@github.com:liuxinyang1984/shell_scipt.git
+	url = git@github.com:liuxinyang1984/shell_script.git
 	branch = main
