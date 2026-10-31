@@ -7,6 +7,7 @@
 | 脚本 | 作用 |
 |------|------|
 | `status/sb-fcitx` | 拼 / 五 / En |
+| `status/sb-volume` | 音量图标 + %（`wpctl`；signal 4） |
 | `status/sb-battery` | 电池图标 + %（无电池不显示） |
 | `status/sb-datetime` | `%A %m-%d %H:%M:%S` |
 
