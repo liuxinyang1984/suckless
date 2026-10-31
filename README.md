@@ -139,7 +139,8 @@ Hyprland **不要**起 dwmblocks。默认块：输入法（`sb-fcitx`）+ 日期
 | Mod+- / = | 间隙 − / + |
 | Mod+Shift+= | 间隙归零 |
 | 音量静音 / − / + | `wpctl`（多媒体键；Mac 需 Fn，且 `fnmode=2`） |
-| 屏幕亮度 − / + | `brightnessctl`（同上；不绑键盘背光） |
+| 屏幕亮度 − / + | `brightnessctl`（同上） |
+| 键盘背光 − / + | 可选：`config.def.h` 里已写好注释，Apple/`smc::kbd_backlight` 用时打开 |
 
 鼠标按住 Mod 点客户窗：左键移动，中键浮动，右键缩放。
 
