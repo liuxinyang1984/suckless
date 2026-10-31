@@ -20,6 +20,7 @@ Arch：
 
 ```bash
 sudo pacman -S base-devel libx11 libxinerama libxft libxext libxcb xcb-util
+# 多媒体键（可选运行时）：pipewire 的 wpctl、brightnessctl
 ```
 
 Alpine：

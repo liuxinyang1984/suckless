@@ -138,8 +138,12 @@ Hyprland **不要**起 dwmblocks。默认块：输入法（`sb-fcitx`）+ 日期
 | Mod+Shift+, / . | 窗送到上 / 下一块屏 |
 | Mod+- / = | 间隙 − / + |
 | Mod+Shift+= | 间隙归零 |
+| 音量静音 / − / + | `wpctl`（多媒体键；Mac 需 Fn，且 `fnmode=2`） |
+| 屏幕亮度 − / + | `brightnessctl`（同上；不绑键盘背光） |
 
 鼠标按住 Mod 点客户窗：左键移动，中键浮动，右键缩放。
+
+运行时软依赖：`wpctl`（pipewire）、`brightnessctl`。Apple 键盘若要 F 键优先，在机器上设 `hid_apple fnmode=2`（`/etc/modprobe.d`，不进 dwm 源码）。
 
 ## st 快捷键
 
