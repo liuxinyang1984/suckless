@@ -42,15 +42,21 @@ make PREFIX=$HOME/.local install
 
 ## Patches
 
-<!-- 记录 patch 文件名、顺序、适用 commit、简要说明 -->
-
 | 顺序 | Patch | 说明 |
 |------|-------|------|
-|      |       |      |
+| … | （既有 attachbottom / gaps / systray / …） | 见 `dwm/patches/` |
+| 后 | `dwm-status2d-systray-20261031.diff` | status2d（色/矩形），已与现有 systray 合入 `drawbar` |
+
+status2d 用法（由 dwmblocks / `sb-*` 输出）：
+
+- `^c#RRGGBB^` 前景 · `^b#RRGGBB^` 文字背景 · `^d^` 恢复 SchemeNorm
+- `^rx,y,w,h^` 画矩形 · `^fN^` 光标前移 N 像素
+
+`stext` 缓冲已扩到 1024；块输出见 dwmblocks `MAX_BLOCK_OUTPUT_LENGTH`。
 
 ## config.h 要点
 
-<!-- 键位、tags、layout、colors、status bar 等 -->
+Gruvbox 色、多媒体键、布局 `[T]/[F]/[M]` 等以 `config.def.h` 为准。
 
 ## 在 Xephyr 中运行
 
