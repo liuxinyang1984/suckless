@@ -56,7 +56,7 @@ status2d 用法（由 dwmblocks / `sb-*` 输出）：
 
 ## config.h 要点
 
-Gruvbox 色、多媒体键、布局 `[T]/[F]/[M]` 等以 `config.def.h` 为准。
+Gruvbox 色、多媒体键、布局 `[T]`/`[F]`/`[M]`、栏左 `archicon`（Nerd Font Arch）等以 `config.def.h` 为准。
 
 ## 在 Xephyr 中运行
 
