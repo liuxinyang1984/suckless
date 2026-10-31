@@ -33,6 +33,7 @@ Arch：
 ```bash
 sudo pacman -S base-devel libx11 libxft libxext libxinerama fontconfig freetype2 \
   libx11-xcb xcb-util libxcb \
+  imlib2 zlib \
   gtk3 gcr webkit2gtk-4.1
 ```
 
@@ -41,10 +42,11 @@ Alpine：
 ```bash
 doas apk add build-base libx11-dev libxft-dev libxext-dev libxinerama-dev \
   fontconfig-dev freetype-dev libxcb-dev xcb-util-dev \
+  imlib2-dev zlib-dev \
   gtk+3.0-dev gcr-dev webkit2gtk-4.1-dev pkgconf
 ```
 
-dwm swallow 需要 xcb。surf 需要 GTK3 / GCR / WebKitGTK（`pkg-config` 名见 `surf/config.mk`）。拉 GitHub 不稳时终端 `proxyon`。
+dwm swallow 需要 xcb。st 的 kitty-graphics 需要 imlib2 / zlib。surf 需要 GTK3 / GCR / WebKitGTK（`pkg-config` 名见 `surf/config.mk`）。拉 GitHub 不稳时终端 `proxyon`。
 
 也可用 [dotfiles](https://github.com/liuxinyang1984/dotfiles) 的安装脚本（同样这六个，并装 fontconfig）：
 
@@ -154,8 +156,10 @@ Hyprland **不要**起 dwmblocks。默认块：输入法（`sb-fcitx`）+ 日期
 | Ctrl+Shift+c / v | 剪贴板复制 / 粘贴 |
 | Shift+Insert 或 Ctrl+Shift+y | 主选区粘贴 |
 | 中键 | 粘贴选区 |
+| Ctrl+Shift+右键 | feh 预览点击处图片（kitty-graphics） |
+| Ctrl+Shift+F8 | 开关图片显示 |
 
-备用屏（vim 全屏等）不回滚。
+备用屏（vim 全屏等）不回滚。本机 yazi 图片预览走 Kitty Graphics Protocol（已打补丁）。
 
 已打 fix-keyboard-input：Shift+Enter、Alt+Shift+Enter、Ctrl+Tab、Ctrl+Shift+字母等组合以 CSI u（`ESC [ 码点 ; 修饰值 u`）发给程序，上表之外的组合都交给终端内程序。在 tmux 里用需开启：
 
