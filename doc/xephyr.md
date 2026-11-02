@@ -24,3 +24,15 @@ DISPLAY=:2 dmenu_run -c -bw 2
 ```
 
 先点 Xephyr 窗口再按键，否则快捷键可能被 Hyprland 截走。display 被占用就换 `:3`。
+
+## 测 kiosk（无 WM 全屏会话）
+
+推荐包装脚本（[`config/x11/kiosk/`](https://github.com/liuxinyang1984/dotfiles/tree/master/config/x11/kiosk)）：
+
+```bash
+~/git/dotfiles/install.sh desktop:kiosk
+kiosk-xephyr.sh              # 默认 st+tmux
+kiosk-xephyr.sh alacritty    # 参数即命令
+```
+
+详见 [`config/x11/README.md`](https://github.com/liuxinyang1984/dotfiles/blob/master/config/x11/README.md)。
