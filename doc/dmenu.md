@@ -40,11 +40,12 @@ make PREFIX=$HOME/.local install
 
 ## Patches
 
-<!-- 记录 patch 文件名、顺序、适用 commit、简要说明 -->
-
 | 顺序 | Patch | 说明 |
 |------|-------|------|
-|      |       |      |
+| … | `dmenu-border-…` / center / password | 既有 |
+| 后 | `dmenu-managed-20261103-feature-cde-border.diff` | `-wm`：取消 override_redirect，外框交 WM（对齐 rofi `-normal-window`） |
+
+dwm 侧：`dmenucmd` 用 `-wm -bw 0`，`rules` 里 `dmenu` float。
 
 ## config.h 要点
 

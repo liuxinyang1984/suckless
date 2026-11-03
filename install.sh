@@ -148,37 +148,25 @@ for c in $MAIN; do
         exit 1
     fi
     echo "==== $c ===="
-    if [ "$c" = dwmblocks ]; then
-        # config.h 在 fork 内维护；勿 rm（不是 config.def.h 生成物）
-        (
-            cd "$src"
-            make
-            if [ "$MODE" = user ]; then
-                echo "安装 → $HOME/.local"
-                make PREFIX="$HOME/.local" install
-                install_status_scripts "$HOME/.local"
-            else
-                echo "安装 → PREFIX（doas/sudo make install）"
-                run_root make install
-                install_status_scripts /usr/local
-            fi
-            make clean
-        )
-        continue
-    fi
+    # 保留本地 config.h（已 gitignore）。无：无则 make 从 config.def.h 生成；
+    # 有则沿用。要吃 def 变更请自行 rm -f config.h 再跑本脚本。
     (
         cd "$src"
-        rm -f config.h
         make
         if [ "$MODE" = user ]; then
             echo "安装 → $HOME/.local"
             make PREFIX="$HOME/.local" install
+            if [ "$c" = dwmblocks ]; then
+                install_status_scripts "$HOME/.local"
+            fi
         else
             echo "安装 → config.mk PREFIX（doas/sudo make install）"
             run_root make install
+            if [ "$c" = dwmblocks ]; then
+                install_status_scripts /usr/local
+            fi
         fi
         make clean
-        rm -f config.h
     )
 done
 
