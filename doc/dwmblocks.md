@@ -10,7 +10,7 @@
 | `status/sb-battery` | 电池图标 + %（无电池不显示） |
 | `status/sb-net` | 网络 Lan/Wifi/Down（status2d 色底；signal 5；时间左侧） |
 | `status/sb-datetime` | 默认时钟+时间；`toggle`/点击展开日历+全日期（signal 2） |
-| `status/sb-fcitx` | 最右：Caps 开 → 黄底 `EN`（`#d79921`）；否则 英 / 拼 / 五（status2d；signal 1） |
+| `status/sb-fcitx` | 最右：Caps → 黄底「英」；拼色底；五与普通英同底（status2d；signal 1） |
 
 `config.h` 在 **dwmblocks fork** 内维护（`BLOCKS` 调用上述 `sb-*`）。
 
