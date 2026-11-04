@@ -7,9 +7,11 @@ set -e
 ROOT="$(cd "$(dirname "$0")" && pwd)"
 MODE=system
 INSTALL_POLKIT=0
+RELOAD_DWM=1
 ALL_COMPONENTS="dwm st dmenu dwmblocks tabbed surf"
 # 未在命令行点名组件时，装全部
 SELECTED=""
+INSTALLED_DWM=0
 
 usage() {
     cat <<'EOF'
@@ -19,22 +21,72 @@ usage() {
   （默认）     doas/sudo make install → config.mk 的 PREFIX（通常 /usr/local）
   --user       make PREFIX=$HOME/.local install（个人，不提权）
   --polkit     额外安装 mini-polkit（需要提权；也可把 mini-polkit 写在组件列表里）
+  --no-reload  装完 dwm 后不自动 SIGHUP 重载（默认：有 DISPLAY 且 dwm 在跑则重载）
   -h, --help   显示本说明
 
 组件（可多选；省略则全部）:
   dwm  st  dmenu  dwmblocks  tabbed  surf  mini-polkit
 
+重载依赖 dwm 的 restartsig 补丁：kill -HUP → exec 新二进制（同 argv[0]）。
+Super+Ctrl+Shift+q 等效。
+
 示例:
   ./install.sh                    # 系统 PREFIX，六个主程序
   ./install.sh --user             # 全部 → ~/.local
-  ./install.sh dwm st             # 只装 dwm、st（系统）
+  ./install.sh dwm st             # 只装 dwm、st（系统）并尝试重载 dwm
   ./install.sh --user dmenu       # 只装 dmenu → ~/.local
   ./install.sh dwmblocks          # 状态栏 + shell_script/status 脚本
   ./install.sh mini-polkit        # 只装 polkit（需提权）
   ./install.sh --polkit dwm       # dwm + mini-polkit
+  ./install.sh --no-reload dwm    # 只编装，不重载会话中的 dwm
 
 嵌套 submodule：git submodule update --init --recursive
 EOF
+}
+
+# restartsig：SIGHUP → quit(restart=1) → execvp。XNextEvent 可能需一次 X 事件才能醒。
+reload_dwm_if_running() {
+    [ "$RELOAD_DWM" = 1 ] || return 0
+    [ "$INSTALLED_DWM" = 1 ] || return 0
+    if [ -z "${DISPLAY:-}" ]; then
+        echo "（无 DISPLAY，跳过 dwm 重载；登录后或 Super+Ctrl+Shift+q）"
+        return 0
+    fi
+    dwmpid=$(pidof dwm 2>/dev/null || true)
+    if [ -z "$dwmpid" ]; then
+        echo "（当前无 dwm 进程，跳过重载）"
+        return 0
+    fi
+    old=$dwmpid
+    echo "重载 dwm（SIGHUP pid $old，restartsig）…"
+    kill -HUP $old 2>/dev/null || true
+    # 唤醒可能堵在 XNextEvent 上的事件循环
+    if command -v xsetroot >/dev/null 2>&1; then
+        xsetroot -name "dwm-reload-$(date +%s)" 2>/dev/null || true
+    fi
+    i=0
+    while [ "$i" -lt 20 ]; do
+        sleep 0.1
+        new=$(pidof dwm 2>/dev/null || true)
+        # 进程已换，或短暂消失后起来
+        if [ -n "$new" ] && [ "$new" != "$old" ]; then
+            echo "dwm 已重载 → pid $new"
+            return 0
+        fi
+        if [ -z "$new" ] && [ "$i" -gt 5 ]; then
+            # 正在 exec 的空窗
+            :
+        fi
+        i=$((i + 1))
+    done
+    new=$(pidof dwm 2>/dev/null || true)
+    if [ -n "$new" ] && [ "$new" != "$old" ]; then
+        echo "dwm 已重载 → pid $new"
+    elif [ "$new" = "$old" ]; then
+        echo "警告: dwm pid 未变（$old）。可再试 Super+Ctrl+Shift+q，或检查是否卡住。" >&2
+    else
+        echo "警告: 重载后未看到 dwm 进程。" >&2
+    fi
 }
 
 is_component() {
@@ -48,6 +100,7 @@ for arg in "$@"; do
     case "$arg" in
         --user) MODE=user ;;
         --polkit) INSTALL_POLKIT=1 ;;
+        --no-reload) RELOAD_DWM=0 ;;
         -h|--help) usage; exit 0 ;;
         -*)
             echo "未知选项: $arg（见 ./install.sh --help）" >&2
@@ -166,6 +219,9 @@ for c in $MAIN; do
                 install_status_scripts /usr/local
             fi
         fi
+        if [ "$c" = dwm ]; then
+            INSTALLED_DWM=1
+        fi
         make clean
     )
 done
@@ -183,6 +239,8 @@ if [ "$INSTALL_POLKIT" = 1 ]; then
         make clean 2>/dev/null || true
     )
 fi
+
+reload_dwm_if_running
 
 if [ "$MODE" = user ]; then
     echo "完成（个人 PREFIX=$HOME/.local）。组件:$MAIN${INSTALL_POLKIT:+ mini-polkit}"
