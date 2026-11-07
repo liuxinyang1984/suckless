@@ -30,7 +30,3 @@
 	path = shell_script
 	url = git@github.com:liuxinyang1984/shell_script.git
 	branch = main
-[submodule "slock"]
-	path = slock
-	url = git@github.com:liuxinyang1984/slock.git
-	branch = master

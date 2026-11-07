@@ -6,7 +6,7 @@
 
 X11 会话启动（`startx` / kiosk / dwm / picom）见父仓 [dotfiles `config/x11/`](https://github.com/liuxinyang1984/dotfiles/tree/master/config/x11) 与根 README「X11 会话」。
 
-GitHub：`git@github.com:liuxinyang1984/<仓名>.git`（`suckless`、`dwm`、`st`、`dmenu`、`tabbed`、`surf`、`dwmblocks-async`、`shell_script`、`mini-polkit`、`slock`）。
+GitHub：`git@github.com:liuxinyang1984/<仓名>.git`（`suckless`、`dwm`、`st`、`dmenu`、`tabbed`、`surf`、`dwmblocks-async`、`shell_script`、`mini-polkit`）。`slock/` 暂放在本仓树内（非独立子模块）。
 
 ## 克隆
 
@@ -200,5 +200,5 @@ Mod+Space 拉起。默认横条；竖列加 `-l 20`。
 ## 相关
 
 - [doc/index.md](doc/index.md)
-- [dwm](https://github.com/liuxinyang1984/dwm) · [st](https://github.com/liuxinyang1984/st) · [dmenu](https://github.com/liuxinyang1984/dmenu) · [tabbed](https://github.com/liuxinyang1984/tabbed) · [surf](https://github.com/liuxinyang1984/surf) · [dwmblocks-async](https://github.com/liuxinyang1984/dwmblocks-async) · [shell_script](https://github.com/liuxinyang1984/shell_script) · [mini-polkit](https://github.com/liuxinyang1984/mini-polkit) · [slock](https://github.com/liuxinyang1984/slock)
+- [dwm](https://github.com/liuxinyang1984/dwm) · [st](https://github.com/liuxinyang1984/st) · [dmenu](https://github.com/liuxinyang1984/dmenu) · [tabbed](https://github.com/liuxinyang1984/tabbed) · [surf](https://github.com/liuxinyang1984/surf) · [dwmblocks-async](https://github.com/liuxinyang1984/dwmblocks-async) · [shell_script](https://github.com/liuxinyang1984/shell_script) · [mini-polkit](https://github.com/liuxinyang1984/mini-polkit) · slock（本仓 `slock/`）
 - 上游：[dwm](https://dwm.suckless.org/) · [st](https://st.suckless.org/) · [dmenu](https://tools.suckless.org/dmenu/) · [tabbed](https://tools.suckless.org/tabbed/) · [surf](https://surf.suckless.org/) · [slock](https://tools.suckless.org/slock/) · [dwmblocks-async](https://github.com/UtkarshVerma/dwmblocks-async)
