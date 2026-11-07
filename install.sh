@@ -8,7 +8,7 @@ ROOT="$(cd "$(dirname "$0")" && pwd)"
 MODE=system
 INSTALL_POLKIT=0
 RELOAD_DWM=1
-ALL_COMPONENTS="dwm st dmenu dwmblocks tabbed surf"
+ALL_COMPONENTS="dwm st dmenu dwmblocks tabbed surf slock"
 # 未在命令行点名组件时，装全部
 SELECTED=""
 INSTALLED_DWM=0
@@ -25,7 +25,7 @@ usage() {
   -h, --help   显示本说明
 
 组件（可多选；省略则全部）:
-  dwm  st  dmenu  dwmblocks  tabbed  surf  mini-polkit
+  dwm  st  dmenu  dwmblocks  tabbed  surf  slock  mini-polkit
 
 重载依赖 dwm 的 restartsig 补丁：kill -HUP → exec 新二进制（同 argv[0]）。
 Super+Ctrl+Shift+q 等效。
@@ -91,7 +91,7 @@ reload_dwm_if_running() {
 
 is_component() {
     case "$1" in
-        dwm|st|dmenu|dwmblocks|tabbed|surf|mini-polkit) return 0 ;;
+        dwm|st|dmenu|dwmblocks|tabbed|surf|slock|mini-polkit) return 0 ;;
         *) return 1 ;;
     esac
 }
