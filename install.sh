@@ -48,6 +48,7 @@ mini-polkit 也可单独装（更多说明见该目录）:
   ./install.sh mini-polkit        # 只装 polkit（默认 dmenu 提示）
   ./install.sh mini-polkit --prompt=rofi
   ./install.sh --polkit --prompt=rofi dwm
+  ./install.sh slock              # 锁屏 + xss-lock（见 ./slock/install.sh --help）
   ./install.sh --no-reload dwm    # 只编装，不重载会话中的 dwm
 
 嵌套 submodule：git submodule update --init --recursive
@@ -230,6 +231,17 @@ for c in $MAIN; do
     if [ ! -d "$src" ]; then
         echo "缺少 $src（git submodule update --init --recursive）" >&2
         exit 1
+    fi
+    # slock：委托子脚本（编装 + xss-lock + 空闲说明）
+    if [ "$c" = slock ] && [ -x "$src/install.sh" ]; then
+        _slock_args=
+        [ "$MODE" = user ] && _slock_args="$_slock_args --user"
+        # 父脚本无 --no-packages；整仓装时仍装 xss-lock
+        echo "==== slock → ./slock/install.sh ===="
+        # shellcheck disable=SC2086
+        "$src/install.sh" $_slock_args
+        unset _slock_args
+        continue
     fi
     echo "==== $c ===="
     # 保留本地 config.h（已 gitignore）。无：无则 make 从 config.def.h 生成；
