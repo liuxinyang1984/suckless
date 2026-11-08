@@ -8,6 +8,7 @@ ROOT="$(cd "$(dirname "$0")" && pwd)"
 MODE=system
 INSTALL_POLKIT=0
 RELOAD_DWM=1
+POLKIT_PROMPT="${POLKIT_PROMPT:-dmenu}"
 ALL_COMPONENTS="dwm st dmenu dwmblocks tabbed surf slock"
 # 未在命令行点名组件时，装全部
 SELECTED=""
@@ -21,6 +22,10 @@ usage() {
   （默认）     doas/sudo make install → config.mk 的 PREFIX（通常 /usr/local）
   --user       make PREFIX=$HOME/.local install（个人，不提权）
   --polkit     额外安装 mini-polkit（需要提权；也可把 mini-polkit 写在组件列表里）
+  --prompt=dmenu|rofi
+               mini-polkit 密码框后端（默认 dmenu；rofi 需先 x11:rofi）
+  --prompt dmenu|rofi
+               同上
   --no-reload  装完 dwm 后不自动 SIGHUP 重载（默认：有 DISPLAY 且 dwm 在跑则重载）
   -h, --help   显示本说明
 
@@ -30,14 +35,19 @@ usage() {
 重载依赖 dwm 的 restartsig 补丁：kill -HUP → exec 新二进制（同 argv[0]）。
 Super+Ctrl+Shift+q 等效。
 
+mini-polkit 也可单独装（更多说明见该目录）:
+  ./mini-polkit/install.sh --help
+  ./mini-polkit/install.sh --prompt=rofi
+
 示例:
   ./install.sh                    # 系统 PREFIX，六个主程序
   ./install.sh --user             # 全部 → ~/.local
   ./install.sh dwm st             # 只装 dwm、st（系统）并尝试重载 dwm
   ./install.sh --user dmenu       # 只装 dmenu → ~/.local
   ./install.sh dwmblocks          # 状态栏 + shell_script/status 脚本
-  ./install.sh mini-polkit        # 只装 polkit（需提权）
-  ./install.sh --polkit dwm       # dwm + mini-polkit
+  ./install.sh mini-polkit        # 只装 polkit（默认 dmenu 提示）
+  ./install.sh mini-polkit --prompt=rofi
+  ./install.sh --polkit --prompt=rofi dwm
   ./install.sh --no-reload dwm    # 只编装，不重载会话中的 dwm
 
 嵌套 submodule：git submodule update --init --recursive
@@ -96,10 +106,21 @@ is_component() {
     esac
 }
 
-for arg in "$@"; do
+while [ $# -gt 0 ]; do
+    arg=$1
     case "$arg" in
         --user) MODE=user ;;
         --polkit) INSTALL_POLKIT=1 ;;
+        --prompt=*)
+            POLKIT_PROMPT="${arg#--prompt=}"
+            INSTALL_POLKIT=1
+            ;;
+        --prompt)
+            shift
+            POLKIT_PROMPT="${1:-}"
+            [ -n "$POLKIT_PROMPT" ] || { echo "缺少 --prompt 值" >&2; usage >&2; exit 1; }
+            INSTALL_POLKIT=1
+            ;;
         --no-reload) RELOAD_DWM=0 ;;
         -h|--help) usage; exit 0 ;;
         -*)
@@ -114,7 +135,17 @@ for arg in "$@"; do
             SELECTED="$SELECTED $arg"
             ;;
     esac
+    shift
 done
+
+case "$POLKIT_PROMPT" in
+    dmenu|rofi) ;;
+    *)
+        echo "无效 --prompt=$POLKIT_PROMPT（仅 dmenu|rofi）" >&2
+        usage >&2
+        exit 1
+        ;;
+esac
 
 # 规范化列表
 SELECTED=$(echo "$SELECTED" | xargs)
@@ -227,17 +258,12 @@ for c in $MAIN; do
 done
 
 if [ "$INSTALL_POLKIT" = 1 ]; then
-    echo "==== mini-polkit ===="
-    if [ ! -d "$ROOT/mini-polkit" ]; then
-        echo "缺少 $ROOT/mini-polkit" >&2
+    if [ ! -x "$ROOT/mini-polkit/install.sh" ]; then
+        echo "缺少 $ROOT/mini-polkit/install.sh" >&2
         exit 1
     fi
-    (
-        cd "$ROOT/mini-polkit"
-        make
-        run_root make install
-        make clean 2>/dev/null || true
-    )
+    # 委托子脚本：编装 + prompt 配置 + mini-polkit-agent
+    "$ROOT/mini-polkit/install.sh" --prompt="$POLKIT_PROMPT"
 fi
 
 reload_dwm_if_running

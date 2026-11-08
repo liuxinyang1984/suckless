@@ -92,21 +92,22 @@ Xephyr 嵌套 X11 调试见 [doc/xephyr.md](doc/xephyr.md)。从 Hyprland 往里
 Hyprland **不要**用（继续 hyprpolkitagent）。只给 dwm 的 X 会话。
 
 ```bash
-~/git/suckless/install.sh --polkit
-# 或：~/git/suckless/install.sh mini-polkit
+./install.sh mini-polkit                 # 默认 dmenu -P
+./install.sh mini-polkit --prompt=rofi   # 需先 ./install.sh x11:rofi（rofi-askpass）
+# 或子目录：
+./mini-polkit/install.sh --help
+./mini-polkit/install.sh --prompt=rofi
 ```
 
-dmenu 已有 `-P`。在 dwm 的 xinitrc 里、`exec dwm` 之前：
+写入 `~/.config/mini-polkit/prompt`，会话用 `mini-polkit-agent &`（`dwm-session` 已自动拉）。只改后端不重编：
 
-```sh
-dwmblocks &
-mini-polkit "dmenu -P -c -bw 2 -p Password:" &
-exec dwm
+```bash
+./mini-polkit/install.sh --prompt=dmenu --no-build
 ```
+
+同一会话不要再起其它 polkit agent。测：`pkexec echo ok`。
 
 Hyprland **不要**起 dwmblocks。默认块：输入法（`sb-fcitx`）+ 日期时间（`sb-datetime`），配置在 dwmblocks fork 的 `config.h`，脚本在子模块 `shell_script/status/`。Xephyr 里同一 `DISPLAY` 再开 `dwmblocks`。
-
-同一会话不要再起其它 polkit agent。`polkit.service` 不用改。测：`pkexec echo ok`。
 
 ## dwm 快捷键
 
