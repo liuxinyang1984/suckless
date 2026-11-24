@@ -73,7 +73,7 @@ mini-polkit：`INSTALL_POLKIT=1 ~/git/dotfiles/install.sh desktop:suckless`（�
 ~/git/suckless/install.sh --help
 ```
 
-slock：提示文字 + 输入长度方块；改文案/字体见 `slock/config.def.h` 与 `slock/PATCHES.md`。dwm **Super+Ctrl+l** 调用 `slock`。空闲 5 分钟锁屏 / 15 分钟灭屏由 **dwm-session**（`xss-lock`→`slock` + `xset`）负责，安装见 `./slock/install.sh --help`。
+slock：提示文字 + 输入长度方块；改文案/字体见 `slock/config.def.h` 与 `slock/PATCHES.md`。dwm **Ctrl+Alt+l** 调用 `slock`。空闲 5 分钟锁屏 / 15 分钟灭屏由 **dwm-session**（`xss-lock`→`slock` + `xset`）负责，安装见 `./slock/install.sh --help`。
 
 改配置后对该目录：`rm -f config.h && make && doas make install`（或 `--user` 时 `PREFIX=$HOME/.local`）。dwm 要重启才吃新键位。
 
