@@ -163,6 +163,8 @@ Hyprland **不要**起 dwmblocks。默认块：输入法（`sb-fcitx`）+ 日期
 | Shift+PageUp / PageDown | 回滚一整屏 |
 | Shift+Home / End | 到历史顶 / 底 |
 | 滚轮 | 回滚历史 |
+| 选区拖到顶/底边并停住 | 自动向上/向下滚历史（延伸选区） |
+| Ctrl+/ | CSI-u `\033[47;5u`（nvim 等可识别为 `<C-/>`，非 `<C-_>`） |
 | Ctrl+Shift+c / v | 剪贴板复制 / 粘贴 |
 | Shift+Insert 或 Ctrl+Shift+y | 主选区粘贴 |
 | 中键 | 粘贴选区 |
