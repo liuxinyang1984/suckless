@@ -50,13 +50,13 @@ make PREFIX=$HOME/.local install
 | 3 | `st-boxdraw_v2-0.8.5.diff` | 盒线 / braille 自绘（与 kitty 手工合并） |
 | 4 | `st-scrollback-reflow-standalone-0.9.3.diff` | 回滚 + 重排（与 kitty 手工合并） |
 
-另有（改 `config.def.h`，无独立 diff 文件）：字体 monospace 16、Ctrl+Shift+=/− 缩放、fix-keyboard-input（CSI u）、`anysize_*align=0`。
+另有（改 `config.def.h`，无独立 diff 文件）：字体 monospace 14、Ctrl+Shift+=/− 缩放、fix-keyboard-input（CSI u）、`anysize_*align=0`。
 
 补丁原文在 `st/patches/`。yazi 等预览：本机 st 已支持 kitty 协议；SSH 远端仍看客户端能力。需要假装 kitty 时可 `TERM=xterm-kitty`（yazi 新版本也可认 st-graphics 的 XTVERSION）。
 
 ## config.h 要点
 
-- `font`：`monospace:size=16`
+- `font`：`monospace:size=14`
 - `alpha`：`0.8`
 - `boxdraw` / `boxdraw_braille`：开
 - `anysize_halign` / `anysize_valign`：`0`（余量靠右下）
